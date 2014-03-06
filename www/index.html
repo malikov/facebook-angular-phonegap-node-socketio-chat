@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" ng-app="MobileDev">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>FanPhoneChat</title>  
+
+  <!-- styling the app -->
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+
+
+  
+</head>
+
+<body ng-controller="MainViewCtrl">    
+    <ons-sliding-menu 
+      behind-page="{{main.menuTpl}}" 
+      above-page="{{main.homepageTpl}}">
+    </ons-sliding-menu>
+    
+    
+    
+    
+
+  <!-- start phonegap --> 
+  <script type="text/javascript" src="cordova.js"></script>
+  <!-- end start phonegap -->
+  
+  <!-- facebook js sdk -->
+  <script type="text/javascript" src="facebook-js-sdk.js"></script>
+  <script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
+
+
+  <!-- load angular -->
+  <script type="text/javascript" src="lib/onsen/js/angular/angular.js"></script>    
+  <script type="text/javascript" src="lib/onsen/js/angular/angular-touch.js"></script>
+  <script type="text/javascript" src="lib/onsen/js/angular/angular-resource.min.js"></script>
+  <script type="text/javascript" src="js/App.js"></script> 
+  <!-- end load angular -->
+
+  <!-- load onsen -->
+  <script type="text/javascript" src="lib/onsen/js/onsenui.js"></script> 
+  <!-- end load onsen -->
+
+  <!-- load components -->
+  <script type="text/javascript" src="js/components/angular-phonegap-ready/ready.js">
+  </script> 
+  <script type="text/javascript" src="js/components/angular-phonegap-splashscreen/splashscreen.js">
+  </script> 
+  <script type="text/javascript" src="js/components/angular-phonegap-storage/localstorage.js">
+  </script>
+  <script type="text/javascript" src="js/components/angular-phonegap-facebook/facebook.js">
+  </script>
+  <!-- end load components -->
+
+  <!-- load directives -->
+  <script type="text/javascript" src="js/directives/testDirective.js"></script> 
+  <!-- end load directives -->
+
+  <!-- load controllers -->
+  <script type="text/javascript" src="js/controllers/fb/fbViewCtrl.js"></script> 
+  <script type="text/javascript" src="js/controllers/home/homeViewCtrl.js"></script>
+  <script type="text/javascript" src="js/controllers/profile/profileViewCtrl.js">
+  </script>
+  <script type="text/javascript" src="js/controllers/fb/testGetpictureCtrl.js">
+  </script>
+
+  <script type="text/javascript" src="js/controllers/mainViewCtrl.js">
+  </script>
+  <script type="text/javascript" src="js/controllers/navCtrl.js">
+  </script>
+  <!-- end load controllers -->
+
+  <!-- load services -->
+  <script type="text/javascript" src="js/services/Constants.js"></script>
+  <script type="text/javascript" src="js/services/Profile.js"></script>
+  <script type="text/javascript" src="js/services/User.js"></script>
+  <script type="text/javascript" src="js/services/Auth.js"></script>
+  <!-- end load services -->
+
+  <!-- load filters -->
+
+  <!-- end load filters -->
+
+</body>
+</html>

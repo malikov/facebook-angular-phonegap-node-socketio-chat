@@ -1,0 +1,30 @@
+<ons-page class="center home-page">
+	<ons-scroller>
+		<div ng-controller="HomeViewCtrl" >	
+			<section>
+				<h1>{{view.title}}</h1>
+
+				<ons-button ng-click="pushLocalStorage()">
+					Test localstorage
+				</ons-button>
+
+				<ons-button ng-click="pushFbLogin()">
+					Test FB login
+				</ons-button>
+
+				<ons-button ng-click="pushFbLogout()">
+					Test FB logout
+				</ons-button>
+
+				<ons-button ng-click="pushFbWallPost()">
+					Test FB wall post
+				</ons-button>
+
+				<ons-button ng-click="testGetPicture()">
+					Test FB get Picture
+				</ons-button>
+
+			</section>
+		</div>
+	</ons-scroller>	
+</ons-page>
