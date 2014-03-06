@@ -1,6 +1,6 @@
 # FanPhoneChat
 
-A chat app using the facebook sdk made using angular,phonegap, nodejs, [onsenUI](http://onsenui.io/).
+A chat app using the facebook sdk made using angular,phonegap, nodejs, socket.io [onsenUI](http://onsenui.io/).
 
 ## Running the app
 
