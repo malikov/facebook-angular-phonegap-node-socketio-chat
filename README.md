@@ -4,7 +4,7 @@ A chat app using the facebook sdk made using angular,phonegap, nodejs, [onsenUI]
 
 ## Running the app
 
-1. Get the server [server]()
+1. Get the server [server](https://github.com/malikov/fanphonechat-node-server)
 
 2. Install [node.js](http://nodejs.org/)
 3. Install [PhoneGap](http://phonegap.com/install/)
