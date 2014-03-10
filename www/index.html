@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="MobileDev">
+<html lang="en" ng-app="FanPhoneChat">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,13 +14,14 @@
   
 </head>
 
-<body ng-controller="MainViewCtrl">    
+<body ng-controller="MainViewCtrl"> 
+  <ons-screen>   
     <ons-sliding-menu 
       behind-page="{{main.menuTpl}}" 
       above-page="{{main.homepageTpl}}">
     </ons-sliding-menu>
-    
-    
+  </ons-screen>  
+  
     
     
 
@@ -74,10 +75,12 @@
   <!-- end load controllers -->
 
   <!-- load services -->
-  <script type="text/javascript" src="js/services/Constants.js"></script>
-  <script type="text/javascript" src="js/services/Profile.js"></script>
-  <script type="text/javascript" src="js/services/User.js"></script>
-  <script type="text/javascript" src="js/services/Auth.js"></script>
+  <script type="text/javascript" src="js/services/common/Auth.js"></script>
+  <script type="text/javascript" src="js/services/common/Constants.js"></script>
+
+  <script type="text/javascript" src="js/services/models/Message.js"></script>
+  <script type="text/javascript" src="js/services/models/User.js"></script>
+
   <!-- end load services -->
 
   <!-- load filters -->

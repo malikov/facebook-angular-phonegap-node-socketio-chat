@@ -1,111 +1,120 @@
 'use.strict'
 
-var app = angular.module('MobileDev');
+var app = angular.module('FanPhoneChat');
 
-app.factory('User',['$resource','localstorage', 
+app.factory('Message',['$resource','localstorage', 
   function($resource,localstorage){
-
     
-    var user = {
-  		resource : $resource('api/users/:userId/:messages',
-             {userId : '@id'},
+    var message = function(){};
+
+    message.resource = function(){
+      // see node server /index.js file for the routing
+  		return $resource('api/messages/:id/:threads/:threadId', {messageId : '@id'},
              {
-              getInfo : {method: 'GET', params: {userId : '@id'}, isArray : false}, // query detail which is an object not an array
-              postInfo : {method: 'POST', params: {userId : '@id', user : '@user'}, isArray : false} // query detail which is an object not an array
+              // GET api/messages
+              getAll : {method: 'GET', params: {}, isArray : true},
+
+              // GET api/messages/:id
+              getById : {method: 'GET', params: {messageId : '@messageId'}, isArray : false}, 
+
+              // GET api/messages/threads
+              groupByThreads : {method: 'GET', params: {threads : 'threads'}, isArray : true},
               
-              // wrong the call should be api/messages/:userId ? index = i & count = c
-              // need to create a service for that
-              //getMessages : {method: 'GET', params: {i:'@index', c:'@count', userId : '@id', messages : 'messages'}, isArray: true}, //query list of messages
-              //postMessage :  {method: 'POST', params: {userId :'@id',content : '@content', messages:'messages'}, isArray: true}
-             }),
-      messages : {}, // should be angular.copy(Messages) // the messages service
-  		info : {
-        id: 'undefined',
-        name : 'undefined',
-        email : 'undefined',
-        avatar : 'undefined',
-        //role: userAccess.userRoles.public
-      },
-      /* not yet working I'm fixing the Auth service so that the auth service handles the login part
-  		login : function(){
-        var success = function(response){
+              // GET api/messages/threads/:threadId
+              getByThread : {method: 'GET', params: {threads : 'threads', threadId : '@threadId'}, isArray : true}, 
+              
+              // POST api/messages/threads/:threadId with params message body
+              postThreadMessage : {method: 'POST', params: {threads : 'threads', threadId : '@threadId', message : '@message'}, isArray : false},
+              
+              // POST api/messages with params userId, and recipient
+              postUserMessage : {method: 'POST', params: {userId : '@userId', to : '@recipients', message : '@message'}, isArray : false}
+             });
+    };
+    
+    message.content = {};
+
+    message.getById = function(id,success,error){
+      var self = this;
+      
+      var success = success || function(response){
+        console.log('getInfo success');
+        angular.extend(self.content,response);
+      }
+
+      var error = error || function(){
+        console.log('getInfo error');
+
+      }
+
+      return this.resource.getById({messageId : id},success,error);
+    }
+
+    /*
+      filtering options should be either
+      nothing then fetch all,
+      thread then fetch group by thread,
+      thread/id then fetch for a specific id
+
+      params{
+        index : index in database
+        count : count of current items
+      }
+
+    */
+    message.get = function(params,filters,success,error){
+      var filters = filters || null;
+
+      var params.i = params.index || 0;
+      var params.c = params.count || 0;
+      
+      var success = success || function(response){
+        console.log('success');
+      }
+
+      var error = error || function(error){
+        console.log('error');
+      }
+
+      switch(filters){
+        case 'threads':
+          this.resource.groupByThreads({i : params.i, c :params.c},success,error);
+        break;
+
+        case 'thread':
+          if(params.id == 'undefined')
+            return console.log('Error : an id must be provided in order to call getByThread');
+
+          this.resource.getByThread({id : params.id, i : params.i, c :params.c},success,error);
+        break;
+
+        default :
+          this.resource.getAll({i : params.i, c :params.c},success,error);
+      }
+    }
+
+    message.post = function(params,filters,success,error){
+        var filters = filters || null;
+
+        var success = success || function(response){
           console.log('success');
         }
 
-        var error = function(error){
+        var error = error || function(error){
           console.log('error');
         }
 
-  		  return Auth.login(this,success,error);
+        switch(filters){
+          case 'thread':
+            this.resource.postThreadMessage({threadId : params.threadId, message : params.message},success,error);
+          break;
 
-  		},
-      fbLogin : function(){
-        var loginCallBack = function(){
-
+          default : // post to user
+            this.resource.postUserMessage({i : params.i, c :params.c},success,error);
         }
 
-
-      },
-      logout : function(){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return Auth.logout(this,success,error);
-      },*/
-      getInfo : function(){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.resource.getInfo({userId : this.info.id},success,error);
-      },
-      updateInfo : function(){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.resource.postInfo({userId : this.info.id},success,error);
-      },
-      getMessages : function(){
-        /*
-          This method should use Message service and update 
-        */
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.messages.getMessagesByUserId({userId : this.info.id},success,error);
-      },
-      postMessage : function(message){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.messages.userPostMessages({userId : this.info.id, content : message},success,error);
       }
   		
   	};
 
-  	return user;
+  	return message;
   }])

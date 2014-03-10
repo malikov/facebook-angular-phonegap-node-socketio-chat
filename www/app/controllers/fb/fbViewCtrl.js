@@ -1,6 +1,6 @@
 'use strict';
 
-var app  = angular.module('MobileDev');
+var app  = angular.module('FanPhoneChat');
 
 app.controller('FbViewCtrl',['$rootScope','$scope','Auth','facebook', 
 function($rootScope,$scope,Auth,facebook){

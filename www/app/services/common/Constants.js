@@ -1,13 +1,13 @@
 'use.strict'
 
-var app = angular.module('MobileDev');
+var app = angular.module('FanPhoneChat');
 
 app.factory('constants',[function(){
   	
   	var constants = {
-  		app_name : 'Mobile Dev',
+  		app_name : 'FanPhoneChat',
   		facebook : {
-  			appId : 583766421701316,
+  			appId : 263820857128226,
   			token : ''
   		},
   		twitter : {

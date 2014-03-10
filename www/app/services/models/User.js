@@ -1,63 +1,52 @@
 'use.strict'
 
-var app = angular.module('MobileDev');
+var app = angular.module('FanPhoneChat');
 
-app.factory('User',['$resource','Messages','localstorage', 
-  function($resource,Messages,localstorage){
+app.factory('User',['$resource','localstorage','Message',
+  function($resource,localstorage, Message){
 
+    var user = function(){};
     
-    var user = {
-  		resource : $resource('api/users/:userId/:messages',
-             {userId : '@id'},
-             {
-              getInfo : {method: 'GET', params: {userId : '@id'}, isArray : false}, // query detail which is an object not an array
-              postInfo : {method: 'POST', params: {userId : '@id', user : '@user'}, isArray : false} // query detail which is an object not an array
-              
-              // wrong the call should be api/messages/:userId ? index = i & count = c
-              // need to create a service for that
-              //getMessages : {method: 'GET', params: {i:'@index', c:'@count', userId : '@id', messages : 'messages'}, isArray: true}, //query list of messages
-              //postMessage :  {method: 'POST', params: {userId :'@id',content : '@content', messages:'messages'}, isArray: true}
-             }),
-      messages : {} || angular.copy(Messages), // should be angular.copy(Messages) // the messages service
-  		info : {
-        id: 'undefined',
-        name : 'undefined',
-        email : 'undefined',
-        avatar : 'undefined',
-        //role: userAccess.userRoles.public
-      },
-      /* not yet working I'm fixing the Auth service so that the auth service handles the login part
-  		login : function(){
-        var success = function(response){
-          console.log('success');
-        }
+    user.resource = function(){ 
+      return $resource('api/users/:userId/:messages', {userId : '@id'},
+            {
+              getAll : {method: 'GET', params: {}, isArray : true},
+              getById : {method: 'GET', params: {messageId : '@id'}, isArray : false}, 
+              getByThreads : {method: 'GET', params: {threads : 'threads'}, isArray : false}, 
+              getByThread : {method: 'GET', params: {messageId : '@id'}, isArray : false}, 
+              postThreadMessage : {method: 'POST', params: {theadId : '@id', message : '@message'}, isArray : false}
+              postUserMessage : {method: 'POST', params: {userId : '@id', to : '@recepients'}, isArray : false}
+            });
+    }
 
-        var error = function(error){
-          console.log('error');
-        }
+    user.info = {};
 
-  		  return Auth.login(this,success,error);
+    user.messages = function(){
+      return angular.copy(Messages) || {}; // should never be empty
+    }
+    
+    user.login = function(type){
+      
+      type = type || undefined;
 
-  		},
-      fbLogin : function(){
-        var loginCallBack = function(){
+      var self = this;
+      
+      var success = function(response){
+        console.log('success');
+      }
 
-        }
+      var error = function(error){
+        console.log('error');
+      }
 
+      return Auth.login(this,success,error);
+    }
 
-      },
-      logout : function(){
-        var success = function(response){
-          console.log('success');
-        }
+    user.logout = function(){
 
-        var error = function(error){
-          console.log('error');
-        }
+    }
 
-        return Auth.logout(this,success,error);
-      },*/
-      getInfo : function(){
+    user.getInfo = function(){
         var success = function(response){
           console.log('success');
         }
@@ -67,45 +56,49 @@ app.factory('User',['$resource','Messages','localstorage',
         }
 
         return this.resource.getInfo({userId : this.info.id},success,error);
-      },
-      updateInfo : function(){
-        var success = function(response){
-          console.log('success');
-        }
+    }
+    
+    user.updateInfo = function(){
+      var success = function(response){
+        console.log('success');
+      }
 
-        var error = function(error){
-          console.log('error');
-        }
+      var error = function(error){
+        console.log('error');
+      }
 
-        return this.resource.postInfo({userId : this.info.id},success,error);
-      },
-      getMessages : function(){
+      //return this.resource.postInfo({userId : this.info.id},success,error);
+    }
+    
+    user.getMessages = function(success,error){
         /*
           This method should use Message service and update 
         */
-        var success =  function(response){
+        var success =  success || function(response){
           console.log('success');
+          /*
+            getMessages then push to array
+          */
         }
 
-        var error = function(error){
+        var error = error || function(error){
           console.log('error');
         }
 
         return this.messages.getMessagesByUserId({userId : this.info.id},success,error);
-      },
-      postMessage : function(message){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.messages.userPostMessages({userId : this.info.id, content : message},success,error);
+    }
+     
+    user.postMessage = function(message, success, error){
+      var success = function(response){
+        console.log('success');
       }
-  		
-  	};
+
+      var error = function(error){
+        console.log('error');
+      }
+
+      return this.messages.userPostMessages({userId : this.info.id, content : message},success,error);
+    }
 
   	return user;
   }])
