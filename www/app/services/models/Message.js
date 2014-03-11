@@ -5,7 +5,9 @@ var app = angular.module('FanPhoneChat');
 app.factory('Message',['$resource','localstorage', 
   function($resource,localstorage){
     
-    var message = function(){};
+    var message = function(){
+      this.content = {};
+    };
 
     message.resource = function(){
       // see node server /index.js file for the routing
@@ -27,12 +29,10 @@ app.factory('Message',['$resource','localstorage',
               postThreadMessage : {method: 'POST', params: {threads : 'threads', threadId : '@threadId', message : '@message'}, isArray : false},
               
               // POST api/messages with params userId, and recipient
-              postUserMessage : {method: 'POST', params: {userId : '@userId', to : '@recipients', message : '@message'}, isArray : false}
+              postUserMessage : {method: 'POST', params: {userId : '@userId', to : '@recipient', message : '@message'}, isArray : false}
              });
     };
     
-    message.content = {};
-
     message.getById = function(id,success,error){
       var self = this;
       
@@ -61,7 +61,7 @@ app.factory('Message',['$resource','localstorage',
       }
 
     */
-    message.get = function(params,filters,success,error){
+    message.getAll = function(params,filters,success,error){
       var filters = filters || null;
 
       var params.i = params.index || 0;
@@ -94,6 +94,7 @@ app.factory('Message',['$resource','localstorage',
 
     message.post = function(params,filters,success,error){
         var filters = filters || null;
+        var params = params || {message : "", threadId : 0, userId : 0};
 
         var success = success || function(response){
           console.log('success');
@@ -105,11 +106,13 @@ app.factory('Message',['$resource','localstorage',
 
         switch(filters){
           case 'thread':
+            
+
             this.resource.postThreadMessage({threadId : params.threadId, message : params.message},success,error);
           break;
 
           default : // post to user
-            this.resource.postUserMessage({i : params.i, c :params.c},success,error);
+            this.resource.postUserMessage({userId : params.userId,message : params.message,recipient : params.recipient},success,error);
         }
 
       }

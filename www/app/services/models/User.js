@@ -2,51 +2,47 @@
 
 var app = angular.module('FanPhoneChat');
 
-app.factory('User',['$resource','localstorage','Message',
-  function($resource,localstorage, Message){
+app.factory('User',['$resource','$http','Message',
+  function($resource,$http, Message){
 
-    var user = function(){};
+    var user = function(){
+      this.info = {};
+      this.messageModel = angular.copy(Message);
+    };
     
     user.resource = function(){ 
-      return $resource('api/users/:userId/:messages', {userId : '@id'},
+      return $resource('api/users/:userId', {userId : '@id'},
             {
+              // GET /api/users
               getAll : {method: 'GET', params: {}, isArray : true},
+
+              // GET /api/users/:id
               getById : {method: 'GET', params: {messageId : '@id'}, isArray : false}, 
-              getByThreads : {method: 'GET', params: {threads : 'threads'}, isArray : false}, 
-              getByThread : {method: 'GET', params: {messageId : '@id'}, isArray : false}, 
-              postThreadMessage : {method: 'POST', params: {theadId : '@id', message : '@message'}, isArray : false}
-              postUserMessage : {method: 'POST', params: {userId : '@id', to : '@recepients'}, isArray : false}
             });
     }
 
-    user.info = {};
-
-    user.messages = function(){
-      return angular.copy(Messages) || {}; // should never be empty
-    }
-    
-    user.login = function(type){
+    user.login = function(type, success, error){
       
       type = type || undefined;
 
       var self = this;
       
-      var success = function(response){
+      var success = success || function(response){
         console.log('success');
       }
 
-      var error = function(error){
+      var error = error || function(error){
         console.log('error');
       }
 
       return Auth.login(this,success,error);
     }
 
-    user.logout = function(){
+    user.logout = function($http){
 
     }
 
-    user.getInfo = function(){
+    user.getById = function(id){
         var success = function(response){
           console.log('success');
         }
@@ -55,7 +51,7 @@ app.factory('User',['$resource','localstorage','Message',
           console.log('error');
         }
 
-        return this.resource.getInfo({userId : this.info.id},success,error);
+        return this.resource.getById({userId : id},success,error);
     }
     
     user.updateInfo = function(){
@@ -70,25 +66,13 @@ app.factory('User',['$resource','localstorage','Message',
       //return this.resource.postInfo({userId : this.info.id},success,error);
     }
     
-    user.getMessages = function(success,error){
-        /*
-          This method should use Message service and update 
-        */
-        var success =  success || function(response){
-          console.log('success');
-          /*
-            getMessages then push to array
-          */
-        }
+    user.sendMessage = function(params){
+      var message = message || "";
 
-        var error = error || function(error){
-          console.log('error');
-        }
+      var params = angular.extend(params,{userId : this.info.id});
 
-        return this.messages.getMessagesByUserId({userId : this.info.id},success,error);
-    }
-     
-    user.postMessage = function(message, success, error){
+      var filters = false;
+
       var success = function(response){
         console.log('success');
       }
@@ -97,7 +81,7 @@ app.factory('User',['$resource','localstorage','Message',
         console.log('error');
       }
 
-      return this.messages.userPostMessages({userId : this.info.id, content : message},success,error);
+      return this.messageModel.post(params,filters,success,error);
     }
 
   	return user;

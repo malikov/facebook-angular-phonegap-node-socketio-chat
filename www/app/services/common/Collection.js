@@ -2,33 +2,30 @@
 
 var app = angular.module('FanPhoneChat');
 
-app.factory('Collection',['$resource','Message',
-  function($resource, Message){
+app.factory('Collection',[
+  function(){
 
-    var mCollection = function(){};
+    var collection = function () {
+      this.model = {};
+      this.items = [];
+      this.busy = false;
+      this.itemIndex = 0;
+    };
     
-    mCollection.model = function(){ 
-      return Message.resource;
-    }
-
-    mCollection.items = [];
-    mCollection.busy = false;
-    mCollection.itemIndex = 0;
-
-    mCollection.reset = function(){
+    collection.reset = function(){
       this.clearItems();
       this.clearIndex();
     }
 
-    mCollection.itemCount = function(){
+    collection.itemCount = function(){
       return this.items.length;
     }
 
-    mCollection.clearItems = function(){
+    collection.clearItems = function(){
       this.items = [];
     }
 
-    mCollection.clearIndex = function(){
+    collection.clearIndex = function(){
       this.itemIndex = 0;
     }
 
@@ -36,7 +33,7 @@ app.factory('Collection',['$resource','Message',
       params
       filters
     */
-    mCollection.loadItems = function(params,filters){
+    collection.loadItems = function(params,filters){
       var self = this;
 
       var params = params || {i : self.itemIndex, c : self.itemCount()};
@@ -65,8 +62,8 @@ app.factory('Collection',['$resource','Message',
 
       this.busy = true;
 
-      return this.model.get(params,filters,success,error);
+      return this.model.getAll(params,filters,success,error);
     }
 
-    return mCollection;
+    return collection;
   }])

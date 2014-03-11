@@ -13,8 +13,10 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
             login : {method: 'POST', params: {login:'login', user : '@user'}, isArray : false},
             logout : {method: 'GET', params: {logout : 'logout'}, isArray : false}
           }),
-      userService : angular.copy(User),
-      currentUser : localstorage.getItem('app_user') || angular.copy(User.info), // I need a copy of the service NOT the service 
+      userService : function(){ return angular.copy(User)},
+      currentUser : function(){
+        return localstorage.getItem('app_user') || this.userService.info;
+      }
 
       changeUser : function(user){
         angular.extend(this.currentUser,user);
