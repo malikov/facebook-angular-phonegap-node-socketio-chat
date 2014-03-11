@@ -2,110 +2,87 @@
 
 var app = angular.module('FanPhoneChat');
 
-app.factory('User',['$resource','Messages','localstorage', 
-  function($resource,Messages,localstorage){
+app.factory('User',['$resource','$http','Message',
+  function($resource,$http, Message){
 
+    var user = function(){
+      this.info = {};
+      this.messageModel = angular.copy(Message);
+    };
     
-    var user = {
-  		resource : $resource('api/users/:userId/:messages',
-             {userId : '@id'},
-             {
-              getInfo : {method: 'GET', params: {userId : '@id'}, isArray : false}, // query detail which is an object not an array
-              postInfo : {method: 'POST', params: {userId : '@id', user : '@user'}, isArray : false} // query detail which is an object not an array
-              
-              // wrong the call should be api/messages/:userId ? index = i & count = c
-              // need to create a service for that
-              //getMessages : {method: 'GET', params: {i:'@index', c:'@count', userId : '@id', messages : 'messages'}, isArray: true}, //query list of messages
-              //postMessage :  {method: 'POST', params: {userId :'@id',content : '@content', messages:'messages'}, isArray: true}
-             }),
-      messages : {} || angular.copy(Messages), // should be angular.copy(Messages) // the messages service
-  		info : {
-        id: 'undefined',
-        name : 'undefined',
-        email : 'undefined',
-        avatar : 'undefined',
-        //role: userAccess.userRoles.public
-      },
-      /* not yet working I'm fixing the Auth service so that the auth service handles the login part
-  		login : function(){
-        var success = function(response){
-          console.log('success');
-        }
+    user.resource = function(){ 
+      return $resource('api/users/:userId', {userId : '@id'},
+            {
+              // GET /api/users
+              getAll : {method: 'GET', params: {}, isArray : true},
 
-        var error = function(error){
-          console.log('error');
-        }
+              // GET /api/users/:id
+              getById : {method: 'GET', params: {messageId : '@id'}, isArray : false}, 
+            });
+    }
 
-  		  return Auth.login(this,success,error);
+    user.login = function(type, success, error){
+      
+      type = type || undefined;
 
-  		},
-      fbLogin : function(){
-        var loginCallBack = function(){
-
-        }
-
-
-      },
-      logout : function(){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return Auth.logout(this,success,error);
-      },*/
-      getInfo : function(){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.resource.getInfo({userId : this.info.id},success,error);
-      },
-      updateInfo : function(){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.resource.postInfo({userId : this.info.id},success,error);
-      },
-      getMessages : function(){
-        /*
-          This method should use Message service and update 
-        */
-        var success =  function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.messages.getMessagesByUserId({userId : this.info.id},success,error);
-      },
-      postMessage : function(message){
-        var success = function(response){
-          console.log('success');
-        }
-
-        var error = function(error){
-          console.log('error');
-        }
-
-        return this.messages.userPostMessages({userId : this.info.id, content : message},success,error);
+      var self = this;
+      
+      var success = success || function(response){
+        console.log('success');
       }
-  		
-  	};
+
+      var error = error || function(error){
+        console.log('error');
+      }
+
+      return Auth.login(this,success,error);
+    }
+
+    user.logout = function($http){
+
+    }
+
+    user.getById = function(id){
+        var success = function(response){
+          console.log('success');
+        }
+
+        var error = function(error){
+          console.log('error');
+        }
+
+        return this.resource.getById({userId : id},success,error);
+    }
+    
+    user.updateInfo = function(){
+      var success = function(response){
+        console.log('success');
+      }
+
+      var error = function(error){
+        console.log('error');
+      }
+
+      //return this.resource.postInfo({userId : this.info.id},success,error);
+    }
+    
+    user.sendMessage = function(params){
+      var message = message || "";
+
+      var params = angular.extend(params,{userId : this.info.id});
+
+      var filters = false;
+
+      var success = function(response){
+        console.log('success');
+      }
+
+      var error = function(error){
+        console.log('error');
+      }
+
+      return this.messageModel.post(params,filters,success,error);
+    }
 
   	return user;
   }])

@@ -75,12 +75,13 @@ C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platfo
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\directives\sideBarNav.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\directives\testDirective.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\common \
-C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\CommonService.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\models \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\common\Auth.js \
+C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\common\Collection.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\common\Constants.js \
-C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\common\Profile.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\models\Message.js \
+C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\models\ModelCollection.js \
+C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\models\Thread.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\models\User.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\img\logo.png \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\jquery.js \
