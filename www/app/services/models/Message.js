@@ -64,8 +64,7 @@ app.factory('Message',['$resource','localstorage',
     message.getAll = function(params,filters,success,error){
       var filters = filters || null;
 
-      var params.i = params.index || 0;
-      var params.c = params.count || 0;
+      var params = params || {i:0,c:0};
       
       var success = success || function(response){
         console.log('success');
@@ -114,10 +113,10 @@ app.factory('Message',['$resource','localstorage',
           default : // post to user
             this.resource.postUserMessage({userId : params.userId,message : params.message,recipient : params.recipient},success,error);
         }
-
-      }
+        
+        return;
+    }
   		
-  	};
-
+  	
   	return message;
   }])

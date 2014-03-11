@@ -1,0 +1,10 @@
+{
+    "name" : "FanPhoneChat",
+    "version" : "0.0.1",
+    "author" : "Vincent Maliko",
+    "private" : true,
+
+    "devDependencies" : {
+        "grunt" :                   "~0.4.0"
+    } 
+}

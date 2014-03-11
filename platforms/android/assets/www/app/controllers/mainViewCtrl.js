@@ -58,7 +58,7 @@ app.controller('MainViewCtrl',['$rootScope','$scope','$timeout','Auth','constant
 	},
 	8000);
 
-	//if (!Auth.isLoggedIn()) //logged in update Auth 
-		//$scope.ons.screen.presentPage('pages/register/index.html');	
+	if (!Auth.isLoggedIn()) //logged in update Auth 
+		$scope.ons.screen.presentPage('pages/register/index.html');	
 	
 }])

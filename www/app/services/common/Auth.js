@@ -16,8 +16,7 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
       userService : function(){ return angular.copy(User)},
       currentUser : function(){
         return localstorage.getItem('app_user') || this.userService.info;
-      }
-
+      },
       changeUser : function(user){
         angular.extend(this.currentUser,user);
       },

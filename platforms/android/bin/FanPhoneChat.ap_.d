@@ -66,12 +66,14 @@ C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platfo
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\mainViewCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\navCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\profile \
+C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\register \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\chat\chatViewCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\fb\fbViewCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\fb\testGetpictureCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\home\homeNavCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\home\homeViewCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\profile\profileViewCtrl.js \
+C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\controllers\register\RegisterCtrl.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\directives\sideBarNav.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\directives\testDirective.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\app\services\common \
