@@ -8,10 +8,8 @@ app.factory('User',['$resource','$http','Message',
     var user = function(){
       this.info = {};
       this.messageModel = angular.copy(Message);
-    };
-    
-    user.resource = function(){ 
-      return $resource('api/users/:userId', {userId : '@id'},
+      this.resource = $resource('api/users/:userId', 
+            {userId : '@id'},
             {
               // GET /api/users
               getAll : {method: 'GET', params: {}, isArray : true},
@@ -19,8 +17,8 @@ app.factory('User',['$resource','$http','Message',
               // GET /api/users/:id
               getById : {method: 'GET', params: {messageId : '@id'}, isArray : false}, 
             });
-    }
-
+    };
+  
     user.login = function(type, success, error){
       
       type = type || undefined;

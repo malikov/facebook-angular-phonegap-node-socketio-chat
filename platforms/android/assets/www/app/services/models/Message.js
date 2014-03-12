@@ -7,11 +7,7 @@ app.factory('Message',['$resource','localstorage',
     
     var message = function(){
       this.content = {};
-    };
-
-    message.resource = function(){
-      // see node server /index.js file for the routing
-  		return $resource('api/messages/:id/:threads/:threadId', {messageId : '@id'},
+      this.resource = $resource('api/messages/:id/:threads/:threadId', {messageId : '@id'},
              {
               // GET api/messages
               getAll : {method: 'GET', params: {}, isArray : true},
@@ -31,8 +27,8 @@ app.factory('Message',['$resource','localstorage',
               // POST api/messages with params userId, and recipient
               postUserMessage : {method: 'POST', params: {userId : '@userId', to : '@recipient', message : '@message'}, isArray : false}
              });
-    };
-    
+    }
+
     message.getById = function(id,success,error){
       var self = this;
       
@@ -113,7 +109,7 @@ app.factory('Message',['$resource','localstorage',
           default : // post to user
             this.resource.postUserMessage({userId : params.userId,message : params.message,recipient : params.recipient},success,error);
         }
-        
+
         return;
     }
   		

@@ -150,6 +150,7 @@ C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platfo
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\onsenui_all.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\angular\angular-animate.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\angular\angular-csp.css \
+C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\angular\angular-resource.min.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\angular\angular-touch.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\angular\angular.js \
 C:\Users\vinny M\Desktop\phonegap projects\nginx-server\html\FanPhoneChat\platforms\android\assets\www\lib\onsen\js\angular\angular.min.js \

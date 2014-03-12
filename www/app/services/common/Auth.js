@@ -5,31 +5,31 @@ var app = angular.module('FanPhoneChat');
 app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
   function($rootScope,localstorage,$resource,User,facebook){
 
-   
-   var auth = {
-      authResource : $resource('api/:me/:login/:logout',
-          {},
+   var auth = function(){
+    this.resource = $resource('api/:me/:login/:logout',{},
           {
             login : {method: 'POST', params: {login:'login', user : '@user'}, isArray : false},
             logout : {method: 'GET', params: {logout : 'logout'}, isArray : false}
-          }),
-      userService : function(){ return angular.copy(User)},
-      currentUser : function(){
-        return localstorage.getItem('app_user') || this.userService.info;
-      },
-      changeUser : function(user){
-        angular.extend(this.currentUser,user);
-      },
-      authorize: function(accessLevel, role) {
+          });
+    this.userService = angular.copy(User);
+    this.currentUser = localstorage.getItem('app_user') || this.userService.info;
+   }
+
+   auth.changeUser = function(user){
+      angular.extend(this.currentUser,user);
+   }
+   
+   auth.authorize = function(accessLevel, role) {
         // todo
+   }
 
-      },
-      isLoggedIn: function() {
-        console.log('isLoggedIn function called');
+   auth.isLoggedIn = function() {
+      console.log('isLoggedIn function called');
+    
+      return this.currentUser.id !== 'undefined'; //perhaps a better method for verifying if a user is loggdein could be used ??
+   }
 
-        return this.currentUser.id !== 'undefined'; //perhaps a better method for verifying if a user is loggdein could be used ??
-      },
-      login: function(provider) {
+   auth.login = function(provider) {
         console.log("Auth.login called");
         var self = this;
 
@@ -81,9 +81,10 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
 
         }
 
-        return this.authResource.login({user: self.currentUser}, success, error);
-      },
-      logout: function(provider) {
+        return this.resource.login({user: self.currentUser}, success, error);
+    }
+
+    auth.logout = function(provider) {
         var self = this;
 
         var success = function(response){
@@ -98,8 +99,9 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
         }
 
         return this.authResource.logout({},success,error);
-      },
-      ping : function(){
+    }
+    
+    auth.ping  = function(){
         console.log("pinging to see if user is ....");
         var self  = this;
 
@@ -119,8 +121,9 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
         }
 
         return this.profileResource.get({ping: true},success,error);
-      },
-      resetCookie: function(){
+      }
+
+      auth.resetCookie = function(){
         
         localstorage.removeItem('app_user');
 
@@ -128,7 +131,6 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
         this.changeUser(this.userService.info);
 
       }
-      
 
   };
 
