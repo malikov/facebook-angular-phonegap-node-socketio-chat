@@ -6,20 +6,17 @@ var app = angular.module('FanPhoneChat');
 app.factory('MessageCollection',['Collection','Message',
   function(Collection,Message){
 
-    return function(){
-      this = angular.copy(Collection);
-      this.model = Message.resource;
-    }
+    var mCollection = new Collection(Message.resource);
+    return mCollection;
+
   }])
 
 // collection for thread list
 app.factory('ThreadCollection',['Collection','Thread',
   function(Collection,Thread){
 
-    return function(){
-      this = angular.copy(Collection);
-      this.model = Thread.resource;
-    }
+    var tCollection = new Collection(Thread.resource);
+    return tCollection;
   }])
 
 
@@ -27,9 +24,7 @@ app.factory('ThreadCollection',['Collection','Thread',
 app.factory('UserCollection',['Collection','User',
   function(Collection,User){
 
-    return function(){
-      this = angular.copy(Collection);
-      this.model = User.resource;
-    }
+    var tCollection = new Collection(User.resource);
+    return tCollection;
 
 }])

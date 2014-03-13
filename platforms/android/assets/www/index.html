@@ -15,12 +15,19 @@
 </head>
 
 <body ng-controller="MainViewCtrl"> 
-  <ons-screen>   
-    <ons-sliding-menu 
-      behind-page="{{main.menuTpl}}" 
-      above-page="{{main.homepageTpl}}">
-    </ons-sliding-menu>
-  </ons-screen>  
+
+  <ons-navigator ng-hide="Auth.isLoggedIn()"
+    title="Register View"
+    page="pages/register/index.html"
+    >
+    
+  </ons-navigator>
+
+  <ons-sliding-menu ng-show="Auth.isLoggedIn()"
+        behind-page="{{main.menuTpl}}" 
+        above-page="{{main.homepageTpl}}">
+  </ons-sliding-menu>
+    
   
     
     

@@ -5,9 +5,9 @@ var app = angular.module('FanPhoneChat');
 app.factory('User',['$resource','$http','Message',
   function($resource,$http, Message){
 
-    var user = function(){
-      this.info = {};
-      this.messageModel = angular.copy(Message);
+    var user = function(info){
+      this.info = info || {};
+      this.messageModel = new Message();
       this.resource = $resource('api/users/:userId', 
             {userId : '@id'},
             {
@@ -65,9 +65,11 @@ app.factory('User',['$resource','$http','Message',
     }
     
     user.sendMessage = function(params){
+      var self = this;
+
       var message = message || "";
 
-      var params = angular.extend(params,{userId : this.info.id});
+      var params = angular.extend(params,{userId : self.info.id});
 
       var filters = false;
 

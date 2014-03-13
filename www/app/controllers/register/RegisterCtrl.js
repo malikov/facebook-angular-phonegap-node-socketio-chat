@@ -5,60 +5,18 @@ var app  = angular.module('FanPhoneChat');
 app.controller('RegisterCtrl',['$rootScope','$scope','$timeout','Auth','constants','splashscreen',
 	function($rootScope,$scope,$timeout,Auth,constants,splashscreen){
 
-	console.log('Entering the fbViewCtrl');
+	console.log('RegisterCtrl loaded');
 
-	console.log('loging the rootscope');
-	console.log($rootScope);
-
-	console.log('loging the child scope');
-	console.log($scope)
-	
-	var mainView = {
-		menuTpl : 'pages/sliding_menu.html',
-		homepageTpl : 'pages/homeNavigator.html'
+	$scope.Register = function(){
+		alert('register clicked');
 	}
 
-	var homeNavigator = {
-		title : constants.app_name+' - Homepage',
-		template : 'pages/home/index.html',
-		toggleMenu : function(){
-			/*
-				perhaps this should be only in one variable
-			*/
-			$scope.ons.slidingMenu.toggleMenu();
-		}
+	$scope.FbLogin = function(){
+		alert('FB login clicked');
 	}
 
-	var profileNavigator = {
-		title : constants.app_name+' - Profile',
-		template : 'pages/profile/index.html',
-		toggleMenu : function(){
-			$scope.ons.slidingMenu.toggleMenu();
-		}
+	$scope.InstagramLogin = function(){
+		alert('InstagramLogin clicked');
 	}
-
-	var facebookNavigator = {
-		title : constants.app_name+' - Fb',
-		template : 'pages/facebook/index.html',
-		toggleMenu : function(){
-			$scope.ons.slidingMenu.toggleMenu();
-		}
-	}
-
-	$scope.main = mainView;
-	$scope.homeNav = homeNavigator;
-	$scope.profileNav = profileNavigator;
-	$scope.fbNav = facebookNavigator;
-
-	/*
-		hide the splashcreen when all of this is rendered
-	*/
-	$timeout(function(){
-	 	splashscreen.hide()
-	},
-	8000);
-
-	if (!Auth.isLoggedIn()) //logged in update Auth 
-		$scope.ons.screen.presentPage('pages/register/index.html');	
 	
 }])

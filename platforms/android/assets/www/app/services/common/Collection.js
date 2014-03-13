@@ -5,27 +5,28 @@ var app = angular.module('FanPhoneChat');
 app.factory('Collection',[
   function(){
 
-    var collection = function () {
-      this.model = {};
-      this.items = [];
-      this.busy = false;
-      this.itemIndex = 0;
+    var collection = function (model) {
+      self = this;
+      self.model = model || {};
+      self.items = [];
+      self.busy = false;
+      self.itemIndex = 0;
     };
     
-    collection.reset = function(){
+    collection.prototype.reset = function(){
       this.clearItems();
       this.clearIndex();
     }
 
-    collection.itemCount = function(){
+    collection.prototype.itemCount = function(){
       return this.items.length;
     }
 
-    collection.clearItems = function(){
+    collection.prototype.clearItems = function(){
       this.items = [];
     }
 
-    collection.clearIndex = function(){
+    collection.prototype.clearIndex = function(){
       this.itemIndex = 0;
     }
 
@@ -33,7 +34,7 @@ app.factory('Collection',[
       params
       filters
     */
-    collection.loadItems = function(params,filters){
+    collection.prototype.loadItems = function(params,filters){
       var self = this;
 
       var params = params || {i : self.itemIndex, c : self.itemCount()};

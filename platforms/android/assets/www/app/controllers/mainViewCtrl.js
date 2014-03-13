@@ -57,8 +57,11 @@ app.controller('MainViewCtrl',['$rootScope','$scope','$timeout','Auth','constant
 	 	splashscreen.hide()
 	},
 	8000);
+	
+	$scope.Auth = Auth;
 
-	if (!Auth.isLoggedIn()) //logged in update Auth 
+/*	if (!Auth.isLoggedIn()) //logged in update Auth 
 		$scope.ons.screen.presentPage('pages/register/index.html');	
+		*/
 	
 }])

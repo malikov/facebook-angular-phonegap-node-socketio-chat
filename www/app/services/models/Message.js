@@ -5,8 +5,8 @@ var app = angular.module('FanPhoneChat');
 app.factory('Message',['$resource','localstorage', 
   function($resource,localstorage){
     
-    var message = function(){
-      this.content = {};
+    var message = function(content){
+      this.content = content || {};
       this.resource = $resource('api/messages/:id/:threads/:threadId', {messageId : '@id'},
              {
               // GET api/messages

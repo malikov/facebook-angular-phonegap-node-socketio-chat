@@ -6,14 +6,17 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
   function($rootScope,localstorage,$resource,User,facebook){
 
    var auth = function(){
-    this.resource = $resource('api/:me/:login/:logout',{},
+    var self = this;
+   }
+
+   auth.resource = $resource('api/:me/:login/:logout',{},
           {
             login : {method: 'POST', params: {login:'login', user : '@user'}, isArray : false},
             logout : {method: 'GET', params: {logout : 'logout'}, isArray : false}
           });
-    this.userService = angular.copy(User);
-    this.currentUser = localstorage.getItem('app_user') || this.userService.info;
-   }
+
+   auth.userService = new User();
+   auth.currentUser = localstorage.getItem('app_user') || auth.userService.info;
 
    auth.changeUser = function(user){
       angular.extend(this.currentUser,user);
@@ -25,8 +28,9 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
 
    auth.isLoggedIn = function() {
       console.log('isLoggedIn function called');
-    
-      return this.currentUser.id !== 'undefined'; //perhaps a better method for verifying if a user is loggdein could be used ??
+      var self = this;
+
+      return (self.currentUser.id)? true : false; //perhaps a better method for verifying if a user is loggdein could be used ??
    }
 
    auth.login = function(provider) {
@@ -131,11 +135,6 @@ app.factory('Auth', ['$rootScope','localstorage', '$resource','User','facebook',
         this.changeUser(this.userService.info);
 
       }
-
-  };
-
-  // this should never be used since we're pinging the systeme at startup
-  //auth.user = $cookieStore.get('ft_user') || { id : '', name: '',firstname:'',lastname:'',providers:'', role: auth.userRoles.public };
 
   return auth;
 
