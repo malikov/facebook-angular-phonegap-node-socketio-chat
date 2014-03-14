@@ -11,6 +11,9 @@ app.factory('User',['$resource','$http','Message',
       this.resource = $resource('api/users/:userId', 
             {userId : '@id'},
             {
+              // POST /api/users
+              register : {method : 'POST', params : {user : '@info'}},
+
               // GET /api/users
               getAll : {method: 'GET', params: {}, isArray : true},
 
@@ -19,6 +22,20 @@ app.factory('User',['$resource','$http','Message',
             });
     };
   
+    user.register = function(success,error){
+      var self = this;
+
+      var success = success || function(response){
+        console.log('success');
+      }
+
+      var error = error || function(error){
+        console.log('error');
+      }
+
+      return this.resource.register({},success,error);
+    }
+
     user.login = function(type, success, error){
       
       type = type || undefined;

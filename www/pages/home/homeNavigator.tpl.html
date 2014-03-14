@@ -1,0 +1,13 @@
+<div class="page" ng-controller="NavCtrl">
+	<ons-navigator 
+		page="pages/page1.html" 
+		title="List" 
+		left-button-icon="fa fa-trash-o" 
+		on-left-button-click="clearMemo()" 
+		right-button-icon="fa fa-pencil-square-o" 
+		on-right-button-click="ons.navigator.pushPage(
+			'pages/page2.html', { 
+				title: 'Add'
+			})"
+	></ons-navigator> 
+</div>

@@ -2,50 +2,32 @@
 
 var app  = angular.module('FanPhoneChat');
 
-app.controller('NavCtrl',['$rootScope','$scope','constants', function($rootScope,$scope,constants){
+app.controller('NavCtrl',['$scope','constants', 
+	function($scope,constants){
 
-	console.log('Entering the NavCtrl');
-
-	console.log('loging the rootscope');
-	console.log($rootScope);
-
-	console.log('loging the child scope');
+	console.log('line 8 -- app/controllers/navCtrl.js');
 	console.log($scope)
 	
-	var mainView = {
-		menuTpl : 'pages/sliding_menu.html',
-		homepageTpl : 'pages/homeNavigator.html'
-	}
-
+	
 	var homeNavigator = {
-		title : constants.app_name+' - Homepage',
-		template : 'pages/home/index.html',
-		toggleMenu : function(){
-			/*
-				perhaps this should be only in one variable
-			*/
-			$scope.ons.slidingMenu.toggleMenu();
-		}
-	}
-
-	var profileNavigator = {
-		title : constants.app_name+' - Profile',
-		template : 'pages/profile/index.html',
+		title : constants.app_name,
+		template : 'pages/home/index.tpl.html',
 		toggleMenu : function(){
 			$scope.ons.slidingMenu.toggleMenu();
 		}
 	}
 
-	var facebookNavigator = {
-		title : constants.app_name+' - Fb',
-		template : 'pages/facebook/index.html',
+	var registerNavigator = {
+		title : constants.app_name,
+		template : 'pages/register/index.tpl.html',
 		toggleMenu : function(){
 			$scope.ons.slidingMenu.toggleMenu();
 		}
 	}
 	
-	$scope.homeNav = homeNavigator;
-	$scope.profileNav = profileNavigator;
-	$scope.fbNav = facebookNavigator;
+	$scope.navMenu = {
+		home : homeNavigator,
+		register : registerNavigator
+	}
 	
 }])

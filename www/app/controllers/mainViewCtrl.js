@@ -2,20 +2,16 @@
 
 var app  = angular.module('FanPhoneChat');
 
-app.controller('MainViewCtrl',['$rootScope','$scope','$timeout','Auth','constants','splashscreen',
-	function($rootScope,$scope,$timeout,Auth,constants,splashscreen){
+app.controller('MainViewCtrl',['$scope','$timeout','Auth','constants','splashscreen',
+	function($scope,$timeout,Auth,constants,splashscreen){
 
-	console.log('Entering the fbViewCtrl');
-
-	console.log('loging the rootscope');
-	console.log($rootScope);
-
-	console.log('loging the child scope');
+	console.log('line 8 -- MainViewCtrl --> loging the child scope');
 	console.log($scope)
 	
 	var mainView = {
-		menuTpl : 'pages/sliding_menu.html',
-		homepageTpl : 'pages/homeNavigator.html'
+		menuTpl : 'pages/main/slidingMenu.tpl.html',
+		loggedTpl : 'pages/home/homeNavigator.tpl.html',
+		registerTpl : 'pages/register/registerNavigator.tpl.html'
 	}
 
 	var homeNavigator = {
@@ -45,11 +41,12 @@ app.controller('MainViewCtrl',['$rootScope','$scope','$timeout','Auth','constant
 		}
 	}
 
+	$scope.Auth = Auth;
 	$scope.main = mainView;
 	$scope.homeNav = homeNavigator;
 	$scope.profileNav = profileNavigator;
 	$scope.fbNav = facebookNavigator;
-
+    
 	/*
 		hide the splashcreen when all of this is rendered
 	*/
@@ -58,10 +55,6 @@ app.controller('MainViewCtrl',['$rootScope','$scope','$timeout','Auth','constant
 	},
 	8000);
 	
-	$scope.Auth = Auth;
 
-/*	if (!Auth.isLoggedIn()) //logged in update Auth 
-		$scope.ons.screen.presentPage('pages/register/index.html');	
-		*/
 	
 }])

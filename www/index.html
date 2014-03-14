@@ -16,20 +16,23 @@
 
 <body ng-controller="MainViewCtrl"> 
 
-  <ons-navigator ng-hide="Auth.isLoggedIn()"
-    title="Register View"
-    page="pages/register/index.html"
-    >
-    
-  </ons-navigator>
+  <ons-screen ng-hide="Auth.isLoggedIn()">
+    <div class="page" ng-controller="NavCtrl">
+      <ons-navigator 
+        page="{{navMenu.register.template}}" 
+        title="{{navMenu.register.title}}" 
+      >
+      </ons-navigator> 
+    </div>
+  </ons-screen>
 
-  <ons-sliding-menu ng-show="Auth.isLoggedIn()"
-        behind-page="{{main.menuTpl}}" 
-        above-page="{{main.homepageTpl}}">
-  </ons-sliding-menu>
-    
+  <ons-screen ng-show="Auth.isLoggedIn()">
+    <ons-sliding-menu 
+    behind-page="{{mainView.menuTpl}}" 
+    above-page="{{mainView.loggedTpl}}">
+    </ons-sliding-menu>
+  </ons-screen>
   
-    
     
 
   <!-- start phonegap --> 
