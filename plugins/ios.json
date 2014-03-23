@@ -1,0 +1,54 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "framework": {
+            "libsqlite3.dylib": {
+                "false": 1
+            },
+            "Social.framework": {
+                "true": 1
+            },
+            "Accounts.framework": {
+                "true": 1
+            },
+            "AdSupport.framework": {
+                "true": 1
+            },
+            "Security.framework": {
+                "true": 1
+            }
+        },
+        "config.xml": {
+            "/*": {
+                "<access origin=\"https://m.facebook.com\" />": 1,
+                "<access origin=\"https://graph.facebook.com\" />": 1,
+                "<access origin=\"https://api.facebook.com\" />": 1,
+                "<access origin=\"https://*.fbcdn.net\" />": 1,
+                "<access origin=\"https://*.akamaihd.net\" />": 1,
+                "<feature name=\"org.apache.cordova.facebook.Connect\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /></feature>": 1
+            }
+        },
+        "*-Info.plist": {
+            "FacebookAppID": {
+                "<string>263820857128226</string>": 1
+            },
+            "FacebookDisplayName": {
+                "<string>FanPhoneChat</string>": 1
+            },
+            "CFBundleURLTypes": {
+                "<array><dict><key>CFBundleURLSchemes</key><array><string>fb263820857128226</string></array></dict></array>": 1
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "263820857128226",
+            "APP_NAME": "FanPhoneChat",
+            "PACKAGE_NAME": "com.cooledge.fanphonechat"
+        }
+    },
+    "dependent_plugins": {}
+}

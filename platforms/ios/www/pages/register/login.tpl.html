@@ -1,0 +1,24 @@
+<ons-page class="center" style="padding:10px;">
+	<h1>Login</h1>
+	<form>
+			<ons-text-input 
+	            ng-model="user.username"
+	            placeholder="Enter username" 
+	            style="display: block; width: 100%; margin:5px 0; ">
+	        </ons-text-input>
+
+	        <ons-text-input 
+	        	type="password"
+	            ng-model="user.password"
+	            placeholder="Enter password" 
+	            style="display: block; width: 100%; margin:5px 0;">
+	        </ons-text-input>
+
+	       <input type="password" ng-model="user.password" class="topcoat-text-input" placeholder="Enter password" value="" style="display:block; width:100%; margin:5px 0;" />
+
+			<ons-button type="large" ng-click="controller.authenticate(user)">
+				Login
+			</ons-button>
+	</form>
+	
+</ons-page>

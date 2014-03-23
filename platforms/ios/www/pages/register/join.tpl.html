@@ -1,0 +1,36 @@
+<ons-page class="center" style="padding:10px;">
+	<h1>Signup</h1>
+	<form ng-controller="RegisterCtrl">
+			<ons-text-input 
+	            ng-model="user.name"
+	            placeholder="Enter your fullname" 
+	            style="display: block; width: 100%; margin:2px 0; ">
+	        </ons-text-input>
+	        
+	        <ons-text-input 
+	            ng-model="user.city"
+	            placeholder="City i.e : Los Angeles, Ca, U.S.A" 
+	            style="display: block; width: 100%; margin:5px 0; ">
+	        </ons-text-input>
+
+			<ons-text-input 
+	            ng-model="user.username"
+	            placeholder="Enter username" 
+	            style="display: block; width: 100%; margin:2px 0; ">
+	        </ons-text-input>
+
+	        <ons-text-input 
+	        	type="password"
+	            ng-model="user.password"
+	            placeholder="Enter password" 
+	            style="display: block; width: 100%; margin:2px 0;">
+	        </ons-text-input>
+
+	       <input type="password" ng-model="user.password" class="topcoat-text-input" placeholder="Enter password" value="" style="display:block; width:100%; margin:5px 0;" />
+
+			<ons-button type="large" ng-click="controller.save(user)">
+				Signup
+			</ons-button>
+	</form>
+	
+</ons-page>

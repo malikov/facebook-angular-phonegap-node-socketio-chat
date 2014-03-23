@@ -1,0 +1,12 @@
+<ons-page class="center">
+	<div ng-controller="FbViewCtrl">
+		<h1>Facebook Page</h1>
+		<p>wellcome	{{user.name}}</p>
+		<p>Firstname : {{user.firstname}}</p>
+		<p>Lastname : {{user.lastname}}</p>
+		<p>Avatar : 
+			<img ng-src="{{user.avatar}}" alt="{{user.name}}" />
+		</p>
+		<p>Bio : {{user.bio}}</p>
+	</div>
+</ons-page>
