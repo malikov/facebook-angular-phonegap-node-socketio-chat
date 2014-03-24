@@ -19,13 +19,15 @@ A chat app using the facebook sdk made using angular,phonegap, nodejs, socket.io
 	
 	git clone https://github.com/malikov/facebook-angular-phonegap-node-chat.git
 
-6. Build the project (android only NOT tested for iOs)
+6. Build the project
 	
 	cordova build android
+	cordova build ios
 
 7. Then run it : 
 
 	cordova run android
+	cordova run ios
 
 ## License
 MIT
